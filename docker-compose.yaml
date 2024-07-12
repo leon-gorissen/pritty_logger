@@ -1,0 +1,15 @@
+services:
+  pritty_logger_development:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: pritty_logger_development
+    stdin_open: true 
+    tty: true
+    volumes:
+      - .:/app
+  pritty_logger_tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    container_name: pritty_logger_tests

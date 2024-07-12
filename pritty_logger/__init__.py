@@ -23,14 +23,14 @@ from rich.pretty import pretty_repr
 
 
 class RichLogger:
-    def __init__(self, logger_name: str):
+    def __init__(self, logger_name: str, level: int = logging.INFO, formatter: Optional[logging.Formatter] = None):
         """
         Initialize the RichLogger instance with a specific logger name.
 
         Args:
             logger_name (str): The name to be used for the logger.
         """
-        self.logger = self.setup_logger(logger_name)
+        self.logger = self.setup_logger(logger_name, level, formatter)
 
     def setup_logger(self, logger_name: str, level: int = logging.INFO, formatter: Optional[logging.Formatter] = None) -> logging.Logger:
         """
@@ -55,7 +55,7 @@ class RichLogger:
         console_handler = RichHandler(rich_tracebacks=True)
         console_handler.setLevel(level)
 
-        file_handler = logging.FileHandler(f"/var/log/dynamics_learning/{logger_name}.log")
+        file_handler = logging.FileHandler(f"/var/log/{logger_name}.log")
         file_handler.setLevel(level)
 
         file_handler.setFormatter(formatter)
@@ -68,14 +68,20 @@ class RichLogger:
     def log(
         self,
         message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]],
-        level: str = "info",
+        level: int = logging.INFO,
     ):
         """
         Log messages using rich formatting.
 
         Args:
             message (Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]): Log message.
-            level (str, optional): Logger levels: "debug", "info", "warning", "error", "critical". Defaults to "info".
+            level (int, optional): Logger levels: 
+                logging.DEBUG = 10, 
+                logging.INFO = 20, 
+                logging.WARNING = 30,
+                logging.ERROR = 40, 
+                logging.CRITICAL = 50. 
+                Defaults to "info".
         """
         if isinstance(message, str):
             formatted_message = message
