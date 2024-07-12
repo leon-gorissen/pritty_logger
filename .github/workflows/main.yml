@@ -34,7 +34,7 @@ jobs:
       run: docker-compose build
 
     - name: Lint with ruff
-      run: docker-compose run up --exit-code-from ruff_linter ruff_linter
+      run: docker-compose up --exit-code-from ruff_linter ruff_linter
 
     - name: Format with ruff
       run: docker-compose run ruff_format
