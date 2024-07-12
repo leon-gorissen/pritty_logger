@@ -1,17 +1,17 @@
-# Pretty logger
+# Pritty logger
 
 A simple logger that logs to console using the rich library and to file in /var/log. Created to simplify setting up logging in containerized development and deployment.
 
 ## Installation 
 
 ```bash
-pip install pretty_logger
+pip install pritty_logger
 ``` 
 
 ## Usage
 
 ```python
-from rich_logger import RichLogger
+from pritty_logger import RichLogger
 
 logger = RichLogger("example")
 logger.log("This is an info message")
