@@ -1,3 +1,5 @@
+[![Python package](https://github.com/leon-gorissen/pritty_logger/actions/workflows/main.yml/badge.svg)](https://github.com/leon-gorissen/pritty_logger/actions/workflows/main.yml)
+
 # Pritty logger
 
 A simple logger that logs to console using the rich library and to file in /var/log. Created to simplify setting up logging in containerized development and deployment.
