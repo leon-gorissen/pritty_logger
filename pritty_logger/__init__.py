@@ -93,6 +93,10 @@ class RichLogger:
         """Log a message with level INFO."""
         self.log(message, level="info")
 
+    def warn(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+        """Log a message with level WARNING."""
+        self.log(message, level="warning")
+
     def warning(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level WARNING."""
         self.log(message, level="warning")
