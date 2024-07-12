@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pritty_logger",
-    version="0.1.2",
+    version="0.2.0",
     description="A logger with rich formatting",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
