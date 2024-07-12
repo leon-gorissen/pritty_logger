@@ -23,7 +23,12 @@ from rich.pretty import pretty_repr
 
 
 class RichLogger:
-    def __init__(self, logger_name: str, level: int = logging.INFO, formatter: Optional[logging.Formatter] = None):
+    def __init__(
+        self,
+        logger_name: str,
+        level: int = logging.INFO,
+        formatter: Optional[logging.Formatter] = None,
+    ):
         """
         Initialize the RichLogger instance with a specific logger name.
 
@@ -32,22 +37,28 @@ class RichLogger:
         """
         self.logger = self.setup_logger(logger_name, level, formatter)
 
-    def setup_logger(self, logger_name: str, level: int = logging.INFO, formatter: Optional[logging.Formatter] = None) -> logging.Logger:
+    def setup_logger(
+        self,
+        logger_name: str,
+        level: int = logging.INFO,
+        formatter: Optional[logging.Formatter] = None,
+    ) -> logging.Logger:
         """
         Set up the logger with a console handler and a file handler.
 
         Args:
             logger_name (str): The name to be used for the logger.
             level (int, optional): The logging level. Defaults to logging.INFO.
-            formatter (logging.Formatter, optional): The formatter for the log messages. 
+            formatter (logging.Formatter, optional): The formatter for the log messages.
                                                      Defaults to a standard formatter.
 
         Returns:
             logging.Logger: Configured logger instance.
         """
         if formatter is None:
-            formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-
+            formatter = logging.Formatter(
+                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+            )
 
         logger = logging.getLogger(f"{logger_name}_logger")
         logger.setLevel(level)
@@ -75,12 +86,12 @@ class RichLogger:
 
         Args:
             message (Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]): Log message.
-            level (int, optional): Logger levels: 
-                logging.DEBUG = 10, 
-                logging.INFO = 20, 
+            level (int, optional): Logger levels:
+                logging.DEBUG = 10,
+                logging.INFO = 20,
                 logging.WARNING = 30,
-                logging.ERROR = 40, 
-                logging.CRITICAL = 50. 
+                logging.ERROR = 40,
+                logging.CRITICAL = 50.
                 Defaults to "info".
         """
         if isinstance(message, str):
@@ -91,29 +102,42 @@ class RichLogger:
         log_method = getattr(self.logger, level)
         log_method(formatted_message)
 
-    def debug(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+    def debug(
+        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
+    ):
         """Log a message with level DEBUG."""
         self.log(message, level="debug")
 
-    def info(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+    def info(
+        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
+    ):
         """Log a message with level INFO."""
         self.log(message, level="info")
 
-    def warn(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+    def warn(
+        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
+    ):
         """Log a message with level WARNING."""
         self.log(message, level="warning")
 
-    def warning(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+    def warning(
+        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
+    ):
         """Log a message with level WARNING."""
         self.log(message, level="warning")
 
-    def error(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+    def error(
+        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
+    ):
         """Log a message with level ERROR."""
         self.log(message, level="error")
 
-    def critical(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
+    def critical(
+        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
+    ):
         """Log a message with level CRITICAL."""
         self.log(message, level="critical")
+
 
 # Example usage
 if __name__ == "__main__":

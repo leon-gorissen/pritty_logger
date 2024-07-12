@@ -33,8 +33,11 @@ jobs:
     - name: Build Docker images
       run: docker-compose build
 
-    - name: Lint and format with ruff
+    - name: Lint with ruff
       run: docker-compose run ruff_linter
+
+    - name: Lint and format with ruff
+      run: docker-compose run ruff_format
 
     - name: Build and run tests
       run: docker-compose up --exit-code-from pritty_logger_tests pritty_logger_tests

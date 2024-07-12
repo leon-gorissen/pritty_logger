@@ -4,8 +4,8 @@ setup(
     name="pritty_logger",
     version="0.2.2",
     description="A logger with rich formatting",
-    long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     author="Leon Gorißen",
     author_email="leon.gorissen@gmx.de",
     url="https://github.com/leon-gorissen/pritty_logger",
@@ -21,5 +21,5 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )

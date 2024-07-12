@@ -1,4 +1,3 @@
-import pytest
 import logging
 from pritty_logger import RichLogger
 
@@ -21,7 +20,7 @@ def test_log(caplog):
     }
 
     for level_name, logging_level in levels.items():
-        log_instance = RichLogger("test",logging_level)
+        log_instance = RichLogger("test", logging_level)
         with caplog.at_level(logging_level):
             # Log all messages
             for log_level, message in messages.items():
@@ -36,42 +35,47 @@ def test_log(caplog):
 
             caplog.clear()  # Clear caplog for the next iteration
 
+
 def test_info_log(caplog):
     logger = RichLogger("test")
     with caplog.at_level(logging.INFO):
         logger.info("This is an info message")
-    
+
     assert "This is an info message" in caplog.text
     caplog.clear()
+
 
 def test_debug_log(caplog):
     logger = RichLogger("test", logging.DEBUG)
     with caplog.at_level(logging.DEBUG):
         logger.debug("This is a debug message")
-    
+
     assert "This is a debug message" in caplog.text
     caplog.clear()
+
 
 def test_warning_log(caplog):
     logger = RichLogger("test")
     with caplog.at_level(logging.WARNING):
         logger.warning("This is a warning message")
-    
+
     assert "This is a warning message" in caplog.text
     caplog.clear()
+
 
 def test_error_log(caplog):
     logger = RichLogger("test")
     with caplog.at_level(logging.ERROR):
         logger.error("This is an error message")
-    
+
     assert "This is an error message" in caplog.text
     caplog.clear()
+
 
 def test_critical_log(caplog):
     logger = RichLogger("test")
     with caplog.at_level(logging.CRITICAL):
         logger.critical("This is a critical message")
-    
+
     assert "This is a critical message" in caplog.text
     caplog.clear()

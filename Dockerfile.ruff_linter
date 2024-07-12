@@ -7,3 +7,5 @@ COPY . /app
 RUN pip install -r requirements-dev.txt
 
 RUN pip install -e .
+
+CMD [ "ruff check --fix" ] 

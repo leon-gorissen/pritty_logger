@@ -6,8 +6,6 @@ COPY . /app
 
 RUN pip install -r requirements-dev.txt
 
-RUN ls
-
 RUN pip install -e .
 
 CMD [ "pytest" ] 
