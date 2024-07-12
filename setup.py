@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="pritty_logger",
-    version="0.2.0",
+    version="0.2.1",
     description="A logger with rich formatting",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author="Leon Gorißen",
     author_email="leon.gorissen@gmx.de",
-    url="https://github.com/leon-gorissen/rich_logger",
+    url="https://github.com/leon-gorissen/pritty_logger",
     packages=find_packages(),
     install_requires=[
         "rich",
