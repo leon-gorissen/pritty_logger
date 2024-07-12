@@ -30,13 +30,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install docker-compose -y
 
-    - name: Build and run tests
-      run: docker-compose up -d --build pritty_logger_tests
+    - name: Build Docker images
+      run: docker-compose build
 
-    - name: Lint with flake8
-      run: |
-        docker-compose run pritty_logger_tests flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        docker-compose run pritty_logger_tests flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Lint and format with ruff
+      run: docker-compose run ruff_linter
+
+    - name: Build and run tests
+      run: docker-compose up --exit-code-from pritty_logger_tests pritty_logger_tests
 
   publish:
     needs: build
@@ -49,7 +50,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: 3.x
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |

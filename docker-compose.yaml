@@ -8,6 +8,16 @@ services:
     tty: true
     volumes:
       - .:/app
+
+  ruff_linter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ruff .
+
   pritty_logger_tests:
     build:
       context: .

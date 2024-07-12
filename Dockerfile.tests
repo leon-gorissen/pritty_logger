@@ -10,4 +10,4 @@ RUN ls
 
 RUN pip install -e .
 
-RUN pytest
+CMD [ "pytest" ] 
