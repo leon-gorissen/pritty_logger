@@ -1,4 +1,6 @@
-[![Python package](https://github.com/leon-gorissen/pritty_logger/actions/workflows/main.yml/badge.svg)](https://github.com/leon-gorissen/pritty_logger/actions/workflows/main.yml)
+[![Tests](https://github.com/leon-gorissen/pritty_logger/actions/workflows/test.yml/badge.svg)](https://github.com/leon-gorissen/pritty_logger/actions/workflows/test.yml)
+[![Build](https://github.com/leon-gorissen/pritty_logger/actions/workflows/build.yml/badge.svg)](https://github.com/leon-gorissen/pritty_logger/actions/workflows/build.yml)
+[![Python package](https://github.com/leon-gorissen/pritty_logger/actions/workflows/publish.yml/badge.svg)](https://github.com/leon-gorissen/pritty_logger/actions/workflows/publish.yml)
 
 # Pritty logger
 
