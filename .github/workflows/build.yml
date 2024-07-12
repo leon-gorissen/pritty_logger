@@ -5,7 +5,7 @@ name: Build
 
 on:
   workflow_run:
-    workflows: ["Test"]
+    workflows: ["Tests"]
     types:
       - completed
 jobs:
