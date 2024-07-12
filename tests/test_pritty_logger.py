@@ -1,5 +1,5 @@
 import logging
-from pritty_logger import RichLogger        
+from pritty_logger import RichLogger
 
 
 def test_info_log(caplog):

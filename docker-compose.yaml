@@ -27,8 +27,8 @@ services:
     working_dir: /app
     command: ruff format
 
-  pritty_logger_tests:
+  pytest:
     build:
       context: .
       dockerfile: Dockerfile.tests
-    container_name: pritty_logger_tests
+    container_name: pytest

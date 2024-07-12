@@ -37,10 +37,10 @@ jobs:
       run: docker-compose up --exit-code-from ruff_linter ruff_linter
 
     - name: Format with ruff
-      run: docker-compose run ruff_format
+      run: docker-compose up --exit-code-from ruff_format ruff_format
 
     - name: Build and run tests
-      run: docker-compose up --exit-code-from pritty_logger_tests pritty_logger_tests
+      run: docker-compose up --exit-code-from pytest pytest
 
   publish:
     needs: build
