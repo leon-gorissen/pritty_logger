@@ -36,6 +36,8 @@ class RichLogger:
             logger_name (str): The name to be used for the logger.
         """
         self.logger = self.setup_logger(logger_name, level, formatter)
+        self.level = level
+        self.level_name = logging.getLevelName(self.level).lower()
 
     def setup_logger(
         self,
@@ -79,26 +81,19 @@ class RichLogger:
     def log(
         self,
         message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]],
-        level: int = logging.INFO,
+        level: str = "info",
     ):
         """
         Log messages using rich formatting.
 
         Args:
             message (Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]): Log message.
-            level (int, optional): Logger levels:
-                logging.DEBUG = 10,
-                logging.INFO = 20,
-                logging.WARNING = 30,
-                logging.ERROR = 40,
-                logging.CRITICAL = 50.
-                Defaults to "info".
+            level (int, optional): Logger levels:  "debug", "info", "warning", "error", or "critical". Defaults to "info".
         """
         if isinstance(message, str):
             formatted_message = message
         else:
             formatted_message = pretty_repr(message)
-
         log_method = getattr(self.logger, level)
         log_method(formatted_message)
 
