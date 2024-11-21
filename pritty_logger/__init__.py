@@ -69,26 +69,26 @@ class RichLogger:
 
         console_handler = RichHandler(rich_tracebacks=True)
         console_handler.setLevel(level)
+        logger.addHandler(console_handler)
 
-        # Determine log file path based on privileges
+        # Determine log file location
         try:
             if os.geteuid() == 0:  # Check for root privileges
-                log_file = f"/var/log/{logger_name}.log"
+                log_dir = "/var/log"
             else:
-                user_log_dir = Path.home() / ".log"
-                user_log_dir.mkdir(parents=True, exist_ok=True)
-                log_file = user_log_dir / f"{logger_name}.log"
+                log_dir = Path.home() / ".log"
+                log_dir.mkdir(parents=True, exist_ok=True)
         except AttributeError:
-            # Fallback for systems without os.geteuid (e.g., Windows)
-            user_log_dir = Path.home() / ".log"
-            user_log_dir.mkdir(parents=True, exist_ok=True)
-            log_file = user_log_dir / f"{logger_name}.log"
+            # Handle non-Unix systems without os.geteuid()
+            log_dir = Path.home() / ".log"
+            log_dir.mkdir(parents=True, exist_ok=True)
 
+        log_file = log_dir / f"{logger_name}.log"
+
+        # Create file handler
         file_handler = logging.FileHandler(log_file)
         file_handler.setLevel(level)
         file_handler.setFormatter(formatter)
-
-        logger.addHandler(console_handler)
         logger.addHandler(file_handler)
 
         return logger
