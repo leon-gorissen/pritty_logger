@@ -4,7 +4,7 @@
 
 # Pritty logger
 
-A simple logger that logs to console using the rich library and to file in /var/log. Created to simplify setting up logging in containerized development and deployment.
+A simple logger that logs to console using the rich library and to file in /var/log/ or to ~/.log/. Created to simplify setting up logging in containerized development and deployment.
 
 ## Installation 
 

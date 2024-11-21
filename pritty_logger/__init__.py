@@ -17,6 +17,8 @@ Usage example:
 """
 
 import logging
+import os
+from pathlib import Path
 from typing import Union, Dict, Any, List, Tuple, Optional
 from rich.logging import RichHandler
 from rich.pretty import pretty_repr
@@ -68,9 +70,22 @@ class RichLogger:
         console_handler = RichHandler(rich_tracebacks=True)
         console_handler.setLevel(level)
 
-        file_handler = logging.FileHandler(f"/var/log/{logger_name}.log")
-        file_handler.setLevel(level)
+        # Determine log file path based on privileges
+        try:
+            if os.geteuid() == 0:  # Check for root privileges
+                log_file = f"/var/log/{logger_name}.log"
+            else:
+                user_log_dir = Path.home() / ".log"
+                user_log_dir.mkdir(parents=True, exist_ok=True)
+                log_file = user_log_dir / f"{logger_name}.log"
+        except AttributeError:
+            # Fallback for systems without os.geteuid (e.g., Windows)
+            user_log_dir = Path.home() / ".log"
+            user_log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = user_log_dir / f"{logger_name}.log"
 
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(level)
         file_handler.setFormatter(formatter)
 
         logger.addHandler(console_handler)
@@ -97,39 +112,27 @@ class RichLogger:
         log_method = getattr(self.logger, level)
         log_method(formatted_message)
 
-    def debug(
-        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
-    ):
+    def debug(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level DEBUG."""
         self.log(message, level="debug")
 
-    def info(
-        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
-    ):
+    def info(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level INFO."""
         self.log(message, level="info")
 
-    def warn(
-        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
-    ):
+    def warn(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level WARNING."""
         self.log(message, level="warning")
 
-    def warning(
-        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
-    ):
+    def warning(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level WARNING."""
         self.log(message, level="warning")
 
-    def error(
-        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
-    ):
+    def error(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level ERROR."""
         self.log(message, level="error")
 
-    def critical(
-        self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]
-    ):
+    def critical(self, message: Union[str, Exception, Dict[Any, Any], List[Any], Tuple[Any, ...]]):
         """Log a message with level CRITICAL."""
         self.log(message, level="critical")
 
