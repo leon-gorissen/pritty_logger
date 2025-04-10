@@ -74,7 +74,7 @@ class RichLogger:
         # Determine log file location
         try:
             if os.geteuid() == 0:  # Check for root privileges
-                log_dir = "/var/log"
+                log_dir = Path("/var/log")
             else:
                 log_dir = Path.home() / ".log"
                 log_dir.mkdir(parents=True, exist_ok=True)
